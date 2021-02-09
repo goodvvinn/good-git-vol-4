@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Text;
 
 namespace StyleCop
 {
@@ -11,30 +10,108 @@ namespace StyleCop
             {
                 throw new ArgumentNullException(nameof(args));
             }
-        }
 
-        private static void FirstToUpper()
-        {
-            // string str = Console.ReadLine();
-            // string[] arrS = str.Split(' ');
-            string lookup = " \r\n\t";
-            var sb = new StringBuilder(Console.ReadLine());
+            int n = int.Parse(Console.ReadLine());
+            int[] myArray = new int[n];
+            object[] myEven = new object[n];
+            object[] myOdd = new object[n];
+            char[] alpha = "abcdefghijklmnopqrstuvwxyz".ToCharArray();
+            int myEvenCount = 0;
+            int myOddCount = 0;
 
-            if (sb.Length > 0 && char.IsLetter(sb[0]))
+            Random r = new Random();
+            for (int i = 0; i < myArray.Length; i++)
             {
-                sb[0] = char.ToUpper(sb[0]);
+                myArray[i] = r.Next(1, 26);
+
+                // Console.WriteLine(myArray[i] + " ");
             }
 
-            for (int i = 1; i < sb.Length; i++)
+            for (int i = 0; i < myArray.Length; i++)
             {
-                char ch = sb[i];
-                if (lookup.Contains(sb[i - 1]) && char.IsLetter(ch))
+                if (myArray[i] % 2 != 0)
                 {
-                    sb[i] = char.ToUpper(ch);
+                    myOdd[i] = myArray[i];
+                }
+                else
+                {
+                    myEven[i] = myArray[i];
+                }
+
+                // Console.WriteLine($"The value of myOdd[i] : " + myOdd[i]);
+                // Console.WriteLine($"The value of myEven[i] : " + myEven[i]);
+            }
+
+            for (int i = 0; i < myEven.Length; i++)
+            {
+                if (myEven[i] != null)
+                {
+                    myEven[i] = alpha[(int)myEven[i] - 1];
+                    switch (myEven[i])
+                    {
+                        case 'a':
+                        case 'e':
+                        case 'i':
+                        case 'd':
+                        case 'h':
+                        case 'j':
+                            myEven[i] = myEven[i].ToString().ToUpper();
+                            myEvenCount++;
+                            break;
+                        default:
+                            myEven[i] = myEven[i];
+                            break;
+                    }
+
+                    // Console.WriteLine("The value of myEven: {0}", myEven[i]);
                 }
             }
 
-            Console.WriteLine(sb);
+            for (int i = 0; i < myOdd.Length; i++)
+            {
+                if (myOdd[i] != null)
+                {
+                    myOdd[i] = alpha[(int)myOdd[i] - 1];
+                    switch (myOdd[i])
+                    {
+                        case 'a':
+                        case 'e':
+                        case 'i':
+                        case 'd':
+                        case 'h':
+                        case 'j':
+                            myOdd[i] = myOdd[i].ToString().ToUpper();
+                            myOddCount++;
+                            break;
+                        default:
+                            myOdd[i] = myOdd[i];
+                            break;
+                    }
+
+                    // Console.WriteLine("The value of myOdd: {0}, and myOddCount has {1} items", myOdd[i], myOddCount);
+                }
+            }
+
+            if (myOddCount > myEvenCount)
+            {
+                Console.WriteLine("Odds array has more chars in capital than Evens array - {0}", myOddCount);
+            }
+            else if (myOddCount < myEvenCount)
+            {
+                Console.WriteLine("Evens array has more chars in capital than Odds array - {0}", myEvenCount);
+            }
+            else
+            {
+                Console.WriteLine("Both arrays have the same amount of capital chars");
+            }
+
+            // Console.WriteLine("Odds : {0}, Even : {1}", myOddCount, myEvenCount);
+
+            // Array.ForEach(myEven, Console.Write);
+            Console.WriteLine(string.Join(' ', myEven));
+            Console.WriteLine(string.Join(' ', myOdd));
+
+            Console.WriteLine();
         }
     }
 }
