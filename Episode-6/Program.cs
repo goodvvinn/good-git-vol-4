@@ -4,9 +4,9 @@ namespace Episode_6
 {
     internal class Program
     {
-        private enum Alphabet
+        private enum ABC
         {
-            A,
+            A = 1,
             B,
             C,
             D,
@@ -31,7 +31,7 @@ namespace Episode_6
             W,
             X,
             Y,
-            Z
+            Z,
         }
 
         private static void Main(string[] args)
@@ -39,6 +39,12 @@ namespace Episode_6
             string lenght = Console.ReadLine();
             bool res = int.TryParse(lenght, out int a);
             int[] myArray = new int[a];
+            int[] oddsArray = new int[a];
+            int[] evensArray = new int[a];
+
+            // uint oddsCounter = 0;
+
+            // uint evensCounter = 0;
             Random random = new Random();
             if (res)
             {
@@ -58,7 +64,25 @@ namespace Episode_6
             // Console.WriteLine("The array contains : ");
             for (int i = 0; i < myArray.Length; i++)
             {
-                Console.WriteLine(myArray[i]);
+                // Console.Write(myArray[i]);
+            }
+
+            for (int i = 0; i < myArray.Length; i++)
+            {
+                if (myArray[i] % 2 != 0)
+                {
+                    oddsArray[i] = myArray[i];
+                }
+                else
+                {
+                    evensArray[i] = myArray[i];
+                }
+            }
+
+            for (int i = 0; i < oddsArray.Length; i++)
+            {
+                oddsArray[i] = (int)ABC.M;
+                Console.WriteLine(oddsArray[i]);
             }
         }
     }
